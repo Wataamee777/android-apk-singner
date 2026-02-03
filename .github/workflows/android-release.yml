@@ -8,11 +8,13 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
+    # HEAD側の修正を維持：一箇所で環境変数を定義
     env:
       KEYSTORE_BASE64: ${{ secrets.KEYSTORE_BASE64 }}
       KEYSTORE_PASSWORD: ${{ secrets.KEYSTORE_PASSWORD }}
       KEY_ALIAS: ${{ secrets.KEY_ALIAS }}
       KEY_PASSWORD: ${{ secrets.KEY_PASSWORD }}
+
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -29,6 +31,7 @@ jobs:
           gradle-version: 8.7
 
       - name: Decode keystore
+        # 定義したenvを参照するように統一
         if: ${{ env.KEYSTORE_BASE64 != '' }}
         run: |
           echo "${{ env.KEYSTORE_BASE64 }}" | base64 --decode > release.keystore
