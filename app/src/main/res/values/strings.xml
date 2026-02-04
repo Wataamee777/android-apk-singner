@@ -6,4 +6,5 @@
     <string name="status_connected">Headphones detected: silent off</string>
     <string name="status_disconnected">No headphones: silent on</string>
     <string name="status_unknown">Checking...</string>
+    <string name="status_needs_dnd_access">Allow Do Not Disturb access to toggle silent mode.</string>
 </resources>

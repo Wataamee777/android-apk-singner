@@ -68,6 +68,10 @@ class HeadsetMonitorService : Service() {
     }
 
     private fun updateRingerMode(context: Context) {
+        val notificationManager = context.getSystemService(NotificationManager::class.java)
+        if (!notificationManager.isNotificationPolicyAccessGranted) {
+            return
+        }
         val audioManager = context.getSystemService(AudioManager::class.java)
         val connected = HeadsetUtils.isHeadsetConnected(context)
         if (connected) {
