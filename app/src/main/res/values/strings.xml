@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">Headphone Silent</string>
+    <string name="status_title">Headset monitor</string>
+    <string name="start_service">Start background monitor</string>
+    <string name="grant_dnd">Allow Do Not Disturb access</string>
+    <string name="status_connected">Headphones detected: silent off</string>
+    <string name="status_disconnected">No headphones: silent on</string>
+    <string name="status_unknown">Checking...</string>
+</resources>
