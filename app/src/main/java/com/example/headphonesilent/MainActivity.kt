@@ -1,6 +1,9 @@
 package com.example.headphonesilent
 
 import android.Manifest
+package com.example.headphonesilent
+
+import android.Manifest
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.os.Build
