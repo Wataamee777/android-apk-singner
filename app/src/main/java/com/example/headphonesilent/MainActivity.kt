@@ -49,6 +49,8 @@ class MainActivity : ComponentActivity() {
         val connected = HeadsetUtils.isHeadsetConnected(this)
         val notificationManager = getSystemService(NotificationManager::class.java)
         if (!notificationManager.isNotificationPolicyAccessGranted) {
+        val notificationManager = getSystemService<android.app.NotificationManager>()
+        if (notificationManager != null && !notificationManager.isNotificationPolicyAccessGranted) {
             statusText.setText(R.string.status_needs_dnd_access)
             return
         }
