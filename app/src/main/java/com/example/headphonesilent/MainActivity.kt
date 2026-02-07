@@ -2,6 +2,7 @@ package com.example.headphonesilent
 
 import android.Manifest
 import android.app.NotificationManager
+import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.os.Build
@@ -47,10 +48,9 @@ class MainActivity : ComponentActivity() {
 
     private fun updateStatus(statusText: TextView) {
         val connected = HeadsetUtils.isHeadsetConnected(this)
-        val notificationManager = getSystemService(NotificationManager::class.java)
+        val notificationManager =
+            getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
         if (!notificationManager.isNotificationPolicyAccessGranted) {
-        val notificationManager = getSystemService<android.app.NotificationManager>()
-        if (notificationManager != null && !notificationManager.isNotificationPolicyAccessGranted) {
             statusText.setText(R.string.status_needs_dnd_access)
             return
         }
