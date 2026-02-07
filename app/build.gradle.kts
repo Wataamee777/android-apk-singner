@@ -24,7 +24,7 @@ android {
             if (propsFile.exists()) {
                 propsFile.inputStream().use { props.load(it) }
             }
-            storeFile = props.getProperty("storeFile")?.let { file(it) }
+            storeFile = props.getProperty("storeFile")?.let { rootProject.file(it) }
             storePassword = props.getProperty("storePassword")
             keyAlias = props.getProperty("keyAlias")
             keyPassword = props.getProperty("keyPassword")
