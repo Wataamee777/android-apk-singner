@@ -29,6 +29,7 @@ class MainActivity : ComponentActivity() {
             this,
             Intent(this, HeadsetMonitorService::class.java),
         )
+        ensureDndAccess()
         updateStatus(statusText)
 
         dndButton.setOnClickListener {
@@ -70,6 +71,14 @@ class MainActivity : ComponentActivity() {
                 arrayOf(Manifest.permission.POST_NOTIFICATIONS),
                 1001,
             )
+        }
+    }
+
+    private fun ensureDndAccess() {
+        val notificationManager =
+            getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
+        if (!notificationManager.isNotificationPolicyAccessGranted) {
+            startActivity(Intent(Settings.ACTION_NOTIFICATION_POLICY_ACCESS_SETTINGS))
         }
     }
 }
