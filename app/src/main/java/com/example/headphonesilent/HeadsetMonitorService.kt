@@ -13,6 +13,9 @@ import android.content.IntentFilter
 import android.media.AudioManager
 import android.os.Build
 import android.os.IBinder
+import android.os.SystemClock
+import android.app.AlarmManager
+import android.app.PendingIntent
 import androidx.core.app.NotificationCompat
 
 class HeadsetMonitorService : Service() {
@@ -37,6 +40,23 @@ class HeadsetMonitorService : Service() {
     override fun onDestroy() {
         unregisterReceiver(receiver)
         super.onDestroy()
+    }
+
+    override fun onTaskRemoved(rootIntent: Intent?) {
+        val restartIntent = Intent(applicationContext, HeadsetMonitorService::class.java)
+        val pendingIntent = PendingIntent.getService(
+            this,
+            0,
+            restartIntent,
+            PendingIntent.FLAG_ONE_SHOT or PendingIntent.FLAG_IMMUTABLE,
+        )
+        val alarmManager = getSystemService(AlarmManager::class.java)
+        alarmManager.setExactAndAllowWhileIdle(
+            AlarmManager.ELAPSED_REALTIME,
+            SystemClock.elapsedRealtime() + 1000L,
+            pendingIntent,
+        )
+        super.onTaskRemoved(rootIntent)
     }
 
     override fun onBind(intent: Intent?): IBinder? = null
