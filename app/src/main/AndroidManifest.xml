@@ -17,7 +17,7 @@
         android:theme="@style/Theme.HeadphoneSilent">
 
         <activity
-            android:name=".MainActivity"
+            android:name="jp.me.wataame.MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -26,11 +26,11 @@
         </activity>
 
         <service
-            android:name=".HeadsetMonitorService"
+            android:name="jp.me.wataame.HeadsetMonitorService"
             android:exported="false" />
 
         <receiver
-            android:name=".BootReceiver"
+            android:name="jp.me.wataame.BootReceiver"
             android:exported="false">
             <intent-filter>
                 <action android:name="android.intent.action.BOOT_COMPLETED" />

@@ -6,11 +6,11 @@ plugins {
 }
 
 android {
-    namespace = "com.example.headphonesilent"
+    namespace = "jp.me.wataame"
     compileSdk = 34
 
     defaultConfig {
-        applicationId = "com.example.headphonesilent"
+        applicationId = "jp.me.wataame"
         minSdk = 26
         targetSdk = 34
         versionCode = 1
