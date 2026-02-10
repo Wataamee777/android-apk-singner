@@ -8,6 +8,10 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
+    # ここで環境変数として定義することで、下の if 文で使えるようになります
+    env:
+      KEYSTORE_B64: ${{ secrets.KEYSTORE_BASE64 }}
+      
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -24,12 +28,13 @@ jobs:
           gradle-version: 8.7
 
       - name: Decode keystore
-        if: ${{ secrets.KEYSTORE_BASE64 != '' }}
+        # env に入れた値を使ってチェックします
+        if: ${{ env.KEYSTORE_B64 != '' }}
         run: |
           echo "${{ secrets.KEYSTORE_BASE64 }}" | base64 --decode > release.keystore
 
       - name: Create keystore properties
-        if: ${{ secrets.KEYSTORE_BASE64 != '' }}
+        if: ${{ env.KEYSTORE_B64 != '' }}
         run: |
           cat > keystore.properties <<'PROPS'
           storeFile=release.keystore
