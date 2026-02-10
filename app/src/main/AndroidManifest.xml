@@ -7,6 +7,8 @@
     <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />
     <uses-permission android:name="android.permission.BLUETOOTH_CONNECT" />
     <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
+    <uses-permission android:name="android.permission.ACCESS_NOTIFICATION_POLICY" />
+
 
     <application
         android:allowBackup="true"
@@ -37,4 +39,7 @@
         </receiver>
 
     </application>
+      <application android:name="ApplicationTitle"
+            android:label="@string/app_label"
+            android:icon="@mipmap/ic_launcher" >
 </manifest>
