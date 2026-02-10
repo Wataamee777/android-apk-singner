@@ -30,14 +30,14 @@ jobs:
       - name: Decode keystore
         if: ${{ env.KEYSTORE_B64 != '' }}
         run: |
-          # 作成先を app/ の中に変更
-          echo "${{ secrets.KEYSTORE_BASE64 }}" | base64 --decode > app/release.keystore
+          # app/ を取ってルートに作成
+          echo "${{ secrets.KEYSTORE_BASE64 }}" | base64 --decode > release.keystore
 
       - name: Create keystore properties
         if: ${{ env.KEYSTORE_B64 != '' }}
         run: |
-          # 作成先を app/ の中に変更
-          cat > app/keystore.properties <<'PROPS'
+          # app/ を取ってルートに作成
+          cat > keystore.properties <<'PROPS'
           storeFile=release.keystore
           storePassword=${{ secrets.KEYSTORE_PASSWORD }}
           keyAlias=${{ secrets.KEY_ALIAS }}
