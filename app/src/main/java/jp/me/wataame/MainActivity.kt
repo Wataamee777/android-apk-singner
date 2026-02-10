@@ -1,4 +1,4 @@
-package com.example.headphonesilent
+package jp.me.wataame
 
 import android.Manifest
 import android.app.NotificationManager

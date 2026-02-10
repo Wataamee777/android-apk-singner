@@ -1,4 +1,4 @@
-package com.example.headphonesilent
+package jp.me.wataame
 
 import android.content.Context
 import android.media.AudioDeviceInfo
