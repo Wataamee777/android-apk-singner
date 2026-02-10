@@ -28,15 +28,16 @@ jobs:
           gradle-version: 8.7
 
       - name: Decode keystore
-        # env に入れた値を使ってチェックします
         if: ${{ env.KEYSTORE_B64 != '' }}
         run: |
-          echo "${{ secrets.KEYSTORE_BASE64 }}" | base64 --decode > release.keystore
+          # 作成先を app/ の中に変更
+          echo "${{ secrets.KEYSTORE_BASE64 }}" | base64 --decode > app/release.keystore
 
       - name: Create keystore properties
         if: ${{ env.KEYSTORE_B64 != '' }}
         run: |
-          cat > keystore.properties <<'PROPS'
+          # 作成先を app/ の中に変更
+          cat > app/keystore.properties <<'PROPS'
           storeFile=release.keystore
           storePassword=${{ secrets.KEYSTORE_PASSWORD }}
           keyAlias=${{ secrets.KEY_ALIAS }}
