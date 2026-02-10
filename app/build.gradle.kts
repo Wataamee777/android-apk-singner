@@ -20,14 +20,20 @@ android {
     signingConfigs {
         create("release") {
             val props = Properties()
-            val propsFile = rootProject.file("keystore.properties")
+            // rootProject を取って、プロジェクト(app)フォルダ内のファイルを見るように修正
+            val propsFile = file("keystore.properties") 
+            
             if (propsFile.exists()) {
                 propsFile.inputStream().use { props.load(it) }
+                // デバッグ用に読み込めた場合のみセットする
+                storeFile = props.getProperty("storeFile")?.let { file(it) }
+                storePassword = props.getProperty("storePassword")
+                keyAlias = props.getProperty("keyAlias")
+                keyPassword = props.getProperty("keyPassword")
+            } else {
+                // ファイルがない場合にエラーとして検知しやすくする
+                throw GradleException("keystore.properties not found at ${propsFile.absolutePath}")
             }
-            storeFile = props.getProperty("storeFile")?.let { file(it) }
-            storePassword = props.getProperty("storePassword")
-            keyAlias = props.getProperty("keyAlias")
-            keyPassword = props.getProperty("keyPassword")
         }
     }
 
